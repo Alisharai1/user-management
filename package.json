@@ -7,12 +7,16 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db-migrate-up": "db-migrate up",
+    "db-migrate-down": "db-migrate down"
   },
   "devDependencies": {
     "typescript": "^6.0.3"
   },
   "dependencies": {
-    "@types/node": "^25.9.1"
+    "@types/node": "^25.9.1",
+    "db-migrate": "^0.11.14",
+    "db-migrate-pg": "^1.5.2"
   }
 }

@@ -1,0 +1,10 @@
+{
+    "dev": {
+        "driver": "pg",
+        "user": "Alisha",
+        "password": "may",
+        "host": "localhost",
+        "database": "user_management",
+        "port": "5432"
+    }
+}
