@@ -7,7 +7,7 @@
             "port": 5432,
             "askForPassword": true,
             "driver": "PostgreSQL",
-            "name": "local-user-management",
+            "name": "user_connection",
             "database": "user_management",
             "username": "Alisha"
         }
