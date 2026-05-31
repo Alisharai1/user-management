@@ -1,16 +1,17 @@
 import { UserRepo } from "../repo/user.repo";
 import { v4 } from 'uuid'
+import { UserNotFoundException, UserAlreadyExistException, UserNotExistException } from "../error/UserException"
 
 export class UserService {
     private userRepo
     constructor() {
         this.userRepo = new UserRepo()
     }
-    async addUser(name: string, email: string, age: number, gender: string){
+    async addUser(name: string, email: string, age: number, gender: string) {
         try {
             const user = await this.userRepo.getUserByEmail(email)
             if (user) {
-                throw Error("user already exist,duplicate user can't be added")
+                throw new UserAlreadyExistException("user already exist,duplicate user can't be added")
             }
             const id = v4()
             await this.userRepo.addUser(id, name, email, age, gender)
@@ -25,7 +26,7 @@ export class UserService {
         try {
             const user = await this.userRepo.getUserById(id)
             if (!user) {
-                throw Error("user not found")
+                throw new UserNotFoundException("user not found")
             }
             return user
         } catch (error) {
@@ -37,7 +38,7 @@ export class UserService {
         try {
             const user = await this.userRepo.getUserByEmail(email)
             if (!user) {
-                throw Error("user does not exist ")
+                throw new UserNotExistException("user does not exist ")
             }
             return user
         } catch (error) {
@@ -49,6 +50,8 @@ export class UserService {
     async getAllUsers() {
         try {
             const users = await this.userRepo.getAllUsers()
+            console.log(users);
+            
             return users
         } catch (error) {
             throw error
@@ -78,9 +81,10 @@ export class UserService {
     }
 }
 
-// const service = new UserService()
-// service.addUser('Sneha', 's@g.com', 20, 'female')
-// service.getUserByEmail('neha590@g.com')
+const service = new UserService()
+// service.addUser('Priyank', 'pri@g.com', 26, 'male')
+// service.getUserByEmail('amit12@gmail.com')
 // service.getAllUsers()
-// service.updateUser('46e21b83-4614-4f8b-82e5-2912f876874c','Dharshik Singh',16)
+// service.getUserById('8b190047-88b7-4ba3-81cd-ea2bccaebc7e')
+// service.updateUser('8b190047-88b7-4ba3-81cd-ea2bccaebc7e','Smith Jones',16)
 // service.deleteUser('c633e31d-f0f9-4f74-b867-338a70a4acb9')

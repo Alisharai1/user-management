@@ -3,7 +3,7 @@ import { router as userRouter } from './controller/user.router'
 
 export const app = express()
 
-const port = 3000
+const port = 4000
 
 app.use(json())
 

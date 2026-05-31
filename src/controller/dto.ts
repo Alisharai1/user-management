@@ -1,12 +1,11 @@
 import { object, string, number } from 'yup'
 
 export const createUserSchema = object({
-    id:string().uuid(),
     name: string().required(),
     email: string().email().required(),
     age: number().positive().integer().min(18).required().max(70),
     gender: string().required().oneOf(['female', 'male', 'others'])
-})
+}).required()
 
 export const getUserByIdParamsSchema = object({
     id: string().required().uuid()
