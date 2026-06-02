@@ -1,17 +1,17 @@
 export class UserNotFoundException extends Error {
-    constructor(_message: any) {
-        super();
+    constructor(message: string) {
+        super(message);
     }
 }
 
 export class UserAlreadyExistException extends Error {
-    constructor(_message: any) {
-        super();
+    constructor(message: string) {
+        super(message);
     }
 }
 
 export class UserNotExistException extends Error {
-    constructor(_messgae: any) {
-        super();
+    constructor(message: string) {
+        super(message);
     }
 }

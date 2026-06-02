@@ -2,18 +2,20 @@ import { Router } from "express"
 import { createUserSchema, getUserByIdParamsSchema, updateUserSchema, deleteUserByIdParamsSchema, getUserByEmailQuerySchema } from "./dto"
 import { UserService } from "../service/user.service"
 import { ValidationError } from "yup"
+import { UserRepo } from "../repo/user.repo"
 
 export const router = Router()
 
-const userService = new UserService()
+const userRepo = new UserRepo();
+const userService = new UserService(userRepo)
 
 router.post('/', async (req, res) => {
     try {
         console.log(req.body);
-        
+
         createUserSchema.validateSync(req.body, { abortEarly: false, strict: true })
         console.log(req.body);
-        
+
         const user = await userService.addUser(req.body.name, req.body.email, req.body.age, req.body.gender)
         res.status(200).json(user)
     } catch (error) {

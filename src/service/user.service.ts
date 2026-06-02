@@ -3,10 +3,12 @@ import { v4 } from 'uuid'
 import { UserNotFoundException, UserAlreadyExistException, UserNotExistException } from "../error/UserException"
 
 export class UserService {
-    private userRepo
-    constructor() {
-        this.userRepo = new UserRepo()
+    private readonly userRepo: UserRepo
+
+    constructor(userRepo: UserRepo) {
+        this.userRepo = userRepo
     }
+    
     async addUser(name: string, email: string, age: number, gender: string) {
         try {
             const user = await this.userRepo.getUserByEmail(email)
@@ -51,7 +53,7 @@ export class UserService {
         try {
             const users = await this.userRepo.getAllUsers()
             console.log(users);
-            
+
             return users
         } catch (error) {
             throw error
@@ -81,7 +83,7 @@ export class UserService {
     }
 }
 
-const service = new UserService()
+// const service = new UserService()
 // service.addUser('Priyank', 'pri@g.com', 26, 'male')
 // service.getUserByEmail('amit12@gmail.com')
 // service.getAllUsers()
